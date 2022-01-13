@@ -123,57 +123,6 @@ The product range includes up to 21,700 items and can vary depending on the size
 8. **Feature Selection:** In this step, a feature selection algorithm called Boruta was applied, along with a random forest, and which uses the selection by subset (Wrapper method) as a criterion, which adds feature by feature, training the model and applying it to check if the accuracy increases or decreases, selecting only features that have an increase in model accuracy. 
 
 
-### Modeling
-9. **Machine Learning Algorithms:** In this step, we train five Machine Learning models to compare the results. The first was an averaging model to be used as a baseline; the second and third were a linear regression and a regularized linear regression(lasso) with the objective of measuring the complexity of the phenomenon we are modeling (the worse the result, the more complex the phenomenon); the fourth and fifth model were a Random Forest Regressor and a XGBoost Regressor, which are more sophisticated models and obtain better results in more complex phenomena.
-	
-	**ML Results:**
-	
-	![RossmannCVPerformance](https://user-images.githubusercontent.com/85720162/137336387-d584f99e-b5d7-4a43-afd0-b36be1047fb5.png)
-
-
-	* **Cross-Validation:** technique applied to the training dataset to verify if the results initially obtained are in fact the real ones, or if the validation data were positively or negatively biased. The technique consists of dividing several parts of the dataset between training and validation (following the chronological order of the data) and performing the prediction several times in order to find the average of the predictions that would be the real result of the model.
-	**Cross-Validation Results:**
-	
-		![RossmannCVPerformance](https://user-images.githubusercontent.com/85720162/137337535-ba393661-0449-43a6-b185-ca3b3ba187d9.png)
-		
-		Although random forest initially presented a better result, the model chosen to be used was xgboost because it presented a very similar performance after the HP fine tuning step, in addition to training the model faster and having a much smaller final size compared to random forest.
-	
-10. **Hyperparameter Fine Tuning:** In this step, we look for the best parameters to obtain an even better performance from the model that was chosen in the previous step. To obtain these parameters, an optimization method called Random Search was applied, which randomly tested a set of parameters that were passed to it and returned the set of parameters that presented the best result.
-	
-	**Final Results:**
-	
-	![RFR](https://user-images.githubusercontent.com/85720162/137791145-cbbb4f7d-eb92-4382-97c3-ba467c490233.png)
-
-	
-###	Evaluation
-
-11. **Performance:**
-	* **Financial Results:** At this stage, the transformation of the model result to a business result was carried out. For a better understanding of the model's financial results, the sum of the total predictions of all stores was performed and the best and worst scenarios were created according to the mean absolute percentage error(MAPE) of 10% displayed in the model results of the Hyperparameter Fine Tuning step.
-	
-		![RossmannPredictionScenarios](https://user-images.githubusercontent.com/85720162/137360461-44e22044-65ad-4252-a872-bbb94e174c7a.png)
-	
-	* **Machine Learning Performance:** As can be seen from the image below, the model predictions are very close to the real data, which shows us a very accurate result of the algorithm. Further analysis of the model's performance is available on the notebook in the Translation and Error Interpretation section.
-
-		![ModelPerformance](https://user-images.githubusercontent.com/85720162/137546021-b1ee6264-e5a4-4dfe-b26b-23286d504452.png)
-
-
-###	Deploy
-12. **Deploy Model to Production:** To publish the model in production following the initial objective of being an application with easy and quick access, a bot was developed in the telegram that the user informs the ID of the store that wants to view the sales forecast and a cloud in Heroku is loaded containing the APIs that will receive this information and load the necessary data to carry out the application of the machine learning model and return the result to the user. Below is a flowchart of the operation with the steps of this process:
-
-
-	![Flowchart - Frame 1 (2)](https://user-images.githubusercontent.com/85720162/137370090-71ec9e36-cb3f-48ed-ab81-ef7b5c82b7b3.jpg)
-
-<p align="center">
-Rossmann Bot
-</p>
-
-<p align="center">
- 	<img width="350" alt="drawing" src="img/telegram_bot.gif">
-</p>
-
-<p align="center">
-To access a store's sales forecast, start a Telegram conversation with RossmanBot @rossmann_sales_prediction_bot and enter the store id.
-</p>
 
 * **Next Steps:** For the next CRISP cycle, we can make several improvements to the project:
 
